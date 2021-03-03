@@ -23,6 +23,12 @@ namespace Microsoft.Azure.WebJobs
         public string HostName { get; set; }
 
         /// <summary>
+        /// Gets or sets the ExchangeName to send messages to.
+        /// </summary>
+        [AutoResolve]
+        public string ExchangeName { get; set; }
+
+        /// <summary>
         /// Gets or sets the QueueName to send messages to.
         /// </summary>
         [AutoResolve]

@@ -23,6 +23,11 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
         public string HostName { get; set; }
 
         /// <summary>
+        /// Gets or sets the ExchangeName to enqueue messages to.
+        /// </summary>
+        public string ExchangeName { get; set; }
+
+        /// <summary>
         /// Gets or sets the QueueName to receive messages from or enqueue messages to.
         /// </summary>
         public string QueueName { get; set; }
@@ -57,6 +62,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             JObject options = new JObject
             {
                 { nameof(HostName), HostName },
+                { nameof(ExchangeName), ExchangeName },
                 { nameof(QueueName), QueueName },
                 { nameof(Port), Port },
                 { nameof(PrefetchCount), PrefetchCount },

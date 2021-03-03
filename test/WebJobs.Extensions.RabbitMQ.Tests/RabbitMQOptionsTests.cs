@@ -18,6 +18,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             JObject options = new JObject
             {
                 { nameof(option.HostName), option.HostName },
+                { nameof(option.ExchangeName), option.ExchangeName },
                 { nameof(option.QueueName), option.QueueName },
                 { nameof(option.Port), option.Port },
                 { nameof(option.PrefetchCount), option.PrefetchCount },
@@ -49,6 +50,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             ushort expectedPrefetchCount = 100;
             int expectedPort = 8080;
             string expectedHostName = "someHostName";
+            string expectedExchangeName = "someExchangeName";
             string expectedQueueName = "someQueueName";
             string expectedUserName = "someUserName";
             string expectedPassword = "somePassword";
@@ -57,6 +59,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             {
                 Port = expectedPort,
                 HostName = expectedHostName,
+                ExchangeName = expectedExchangeName,
                 QueueName = expectedQueueName,
                 UserName = expectedUserName,
                 Password = expectedPassword,
@@ -67,6 +70,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             Assert.Equal(expectedPrefetchCount, options.PrefetchCount);
             Assert.Equal(expectedPort, options.Port);
             Assert.Equal(expectedHostName, options.HostName);
+            Assert.Equal(expectedExchangeName, options.HostName);
             Assert.Equal(expectedQueueName, options.QueueName);
             Assert.Equal(expectedUserName, options.UserName);
             Assert.Equal(expectedPassword, options.Password);
