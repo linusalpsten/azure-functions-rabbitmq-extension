@@ -39,14 +39,17 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             _routingKey = routingKey ?? throw new ArgumentNullException(nameof(routingKey));
             _exchangeName = exchangeName ?? throw new ArgumentNullException(nameof(exchangeName));
 
-            if (!string.IsNullOrEmpty(_queueName))
-            {
-                _model.QueueDeclarePassive(_queueName);
-            }
-
             if (!string.IsNullOrEmpty(_exchangeName))
             {
                 _model.ExchangeDeclarePassive(_exchangeName);
+            }
+            else
+            {
+                // Should only declare queue if using default exchange
+                if (!string.IsNullOrEmpty(_routingKey))
+                {
+                    _model.QueueDeclarePassive(_routingKey);
+                }
             }
 
             _batch = _model.CreateBasicPublishBatch();
