@@ -14,7 +14,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
         private readonly string _connectionString;
         private readonly string _hostName;
         private readonly string _exchangeName;
-        private readonly string _queueName;
+        private readonly string _routingKey;
         private readonly string _userName;
         private readonly string _password;
         private readonly int _port;
@@ -32,11 +32,11 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             _model = connectionFactory.CreateConnection().CreateModel();
         }
 
-        public RabbitMQService(string connectionString, string hostName, string exchangeName, string queueName, string userName, string password, int port)
+        public RabbitMQService(string connectionString, string hostName, string exchangeName, string routingKey, string userName, string password, int port)
             : this(connectionString, hostName, userName, password, port)
         {
             _rabbitMQModel = new RabbitMQModel(_model);
-            _queueName = queueName ?? throw new ArgumentNullException(nameof(queueName));
+            _routingKey = routingKey ?? throw new ArgumentNullException(nameof(routingKey));
             _exchangeName = exchangeName ?? throw new ArgumentNullException(nameof(exchangeName));
 
             if (!string.IsNullOrEmpty(_queueName))

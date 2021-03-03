@@ -74,14 +74,14 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
                 throw new InvalidOperationException("RabbitMQ username and password required if not connecting to localhost");
             }
 
-            string queueName = Utility.FirstOrDefault(attribute.QueueName, _options.Value.QueueName);
+            string routingKey = Utility.FirstOrDefault(attribute.RoutingKey, _options.Value.RoutingKey);
             string exchangeName = Utility.FirstOrDefault(attribute.ExchangeName, _options.Value.ExchangeName);
-            if (string.IsNullOrEmpty(queueName) && string.IsNullOrEmpty(exchangeName))
+            if (string.IsNullOrEmpty(routingKey) && string.IsNullOrEmpty(exchangeName))
             {
-                throw new InvalidOperationException("One of queueName or exchangeName should be provided");
+                throw new InvalidOperationException("One of routingKey or exchangeName should be provided");
             }
 
-            _logger.LogInformation($"Queue: {queueName} and Exchange {exchangeName}");
+            _logger.LogInformation($"RoutingKey {routingKey} and Exchange {exchangeName}");
         }
 
         internal RabbitMQContext CreateContext(RabbitMQAttribute attribute)
@@ -89,7 +89,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             string connectionString = Utility.FirstOrDefault(attribute.ConnectionStringSetting, _options.Value.ConnectionString);
             string hostName = Utility.FirstOrDefault(attribute.HostName, _options.Value.HostName);
             string exchangeName = Utility.FirstOrDefault(attribute.ExchangeName, _options.Value.ExchangeName) ?? string.Empty;
-            string queueName = Utility.FirstOrDefault(attribute.QueueName, _options.Value.QueueName) ?? string.Empty;
+            string routingKey = Utility.FirstOrDefault(attribute.RoutingKey, _options.Value.RoutingKey) ?? string.Empty;
             string userName = Utility.FirstOrDefault(attribute.UserName, _options.Value.UserName);
             string password = Utility.FirstOrDefault(attribute.Password, _options.Value.Password);
             int port = Utility.FirstOrDefault(attribute.Port, _options.Value.Port);
@@ -102,13 +102,13 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
                 ConnectionStringSetting = connectionString,
                 HostName = hostName,
                 ExchangeName = exchangeName,
-                QueueName = queueName,
+                RoutingKey = routingKey,
                 UserName = userName,
                 Password = password,
                 Port = port,
             };
 
-            service = GetService(connectionString, hostName, exchangeName, queueName, userName, password, port);
+            service = GetService(connectionString, hostName, exchangeName, routingKey, userName, password, port);
 
             return new RabbitMQContext
             {
@@ -117,9 +117,9 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             };
         }
 
-        internal IRabbitMQService GetService(string connectionString, string hostName, string exchangeName, string queueName, string userName, string password, int port)
+        internal IRabbitMQService GetService(string connectionString, string hostName, string exchangeName, string routingKey, string userName, string password, int port)
         {
-            return _rabbitMQServiceFactory.CreateService(connectionString, hostName, exchangeName, queueName, userName, password, port);
+            return _rabbitMQServiceFactory.CreateService(connectionString, hostName, exchangeName, routingKey, userName, password, port);
         }
 
         // Overloaded method used only for getting the RabbitMQ client

@@ -28,9 +28,9 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
         public string ExchangeName { get; set; }
 
         /// <summary>
-        /// Gets or sets the QueueName to receive messages from or enqueue messages to.
+        /// Gets or sets the RoutingKey to receive messages from or enqueue messages to.
         /// </summary>
-        public string QueueName { get; set; }
+        public string RoutingKey { get; set; }
 
         /// <summary>
         /// Gets or sets the UserName used to authenticate with RabbitMQ.
@@ -63,7 +63,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
             {
                 { nameof(HostName), HostName },
                 { nameof(ExchangeName), ExchangeName },
-                { nameof(QueueName), QueueName },
+                { nameof(RoutingKey), RoutingKey },
                 { nameof(Port), Port },
                 { nameof(PrefetchCount), PrefetchCount },
             };

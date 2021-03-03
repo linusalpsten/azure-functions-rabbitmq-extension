@@ -19,7 +19,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             {
                 { nameof(option.HostName), option.HostName },
                 { nameof(option.ExchangeName), option.ExchangeName },
-                { nameof(option.QueueName), option.QueueName },
+                { nameof(option.RoutingKey), option.RoutingKey },
                 { nameof(option.Port), option.Port },
                 { nameof(option.PrefetchCount), option.PrefetchCount },
             };
@@ -35,7 +35,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             Assert.Equal<ushort>(30, options.PrefetchCount);
             Assert.Equal(0, options.Port);
             Assert.Null(options.HostName);
-            Assert.Null(options.QueueName);
+            Assert.Null(options.RoutingKey);
             Assert.Null(options.UserName);
             Assert.Null(options.Password);
             Assert.Null(options.ConnectionString);
@@ -60,7 +60,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
                 Port = expectedPort,
                 HostName = expectedHostName,
                 ExchangeName = expectedExchangeName,
-                QueueName = expectedQueueName,
+                RoutingKey = expectedQueueName,
                 UserName = expectedUserName,
                 Password = expectedPassword,
                 ConnectionString = expectedConnectionString,
@@ -71,7 +71,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             Assert.Equal(expectedPort, options.Port);
             Assert.Equal(expectedHostName, options.HostName);
             Assert.Equal(expectedExchangeName, options.HostName);
-            Assert.Equal(expectedQueueName, options.QueueName);
+            Assert.Equal(expectedQueueName, options.RoutingKey);
             Assert.Equal(expectedUserName, options.UserName);
             Assert.Equal(expectedPassword, options.Password);
             Assert.Equal(expectedConnectionString, options.ConnectionString);

@@ -24,7 +24,7 @@ namespace WebJobs.Extensions.RabbitMQ.Samples
         // Or, if you already have an appsettings.json, add rabbitMQ and your connection string to the connection strings property.
         public static void TimerTrigger_ConnectionString_StringOutput(
             [TimerTrigger("00:01")] TimerInfo timer,
-            [RabbitMQ(QueueName = "queue")] out string outputMessage,
+            [RabbitMQ(RoutingKey = "route")] out string outputMessage,
             ILogger logger)
         {
             outputMessage = "new";
@@ -33,7 +33,7 @@ namespace WebJobs.Extensions.RabbitMQ.Samples
 
         public static void TimerTrigger_PocoOutput(
              [TimerTrigger("00:01")] TimerInfo timer,
-             [RabbitMQ(HostName = "localhost", QueueName = "queue")] out TestClass outputMessage,
+             [RabbitMQ(HostName = "localhost", RoutingKey = "route")] out TestClass outputMessage,
              ILogger logger)
         {
             outputMessage = new TestClass(1, 1);
@@ -50,7 +50,7 @@ namespace WebJobs.Extensions.RabbitMQ.Samples
         // So you can add items to the queue while the sample is running, and the trigger will be called until the queue is empty.
         public static async Task ProcessMessage_RabbitMQAsyncCollector(
             [QueueTrigger(@"samples-rabbitmq-messages")] string message,
-            [RabbitMQ(QueueName = "queue")] IAsyncCollector<byte[]> messages,
+            [RabbitMQ(RoutingKey = "route")] IAsyncCollector<byte[]> messages,
             ILogger logger)
         {
             logger.LogInformation($"Received queue trigger");
@@ -68,7 +68,7 @@ namespace WebJobs.Extensions.RabbitMQ.Samples
         // So you can add items to the queue while the sample is running, and the trigger will be called until the queue is empty.
         public static void QueueTrigger_RabbitMQOutput(
             [QueueTrigger(@"samples-rabbitmq-messages")] TestClass message,
-            [RabbitMQ(QueueName = "queue")] out TestClass outputMessage,
+            [RabbitMQ(RoutingKey = "route")] out TestClass outputMessage,
             ILogger logger)
         {
             outputMessage = message;
@@ -121,7 +121,7 @@ namespace WebJobs.Extensions.RabbitMQ.Samples
             [RabbitMQTrigger("queue")] string inputMessage,
             [RabbitMQ(
                 HostName = "localhost",
-                QueueName = "hello")] out string outputMessage,
+                RoutingKey = "hello")] out string outputMessage,
             ILogger logger)
         {
             outputMessage = inputMessage;

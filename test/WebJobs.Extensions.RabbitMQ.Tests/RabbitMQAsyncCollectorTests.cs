@@ -26,7 +26,7 @@ namespace WebJobs.Extensions.RabbitMQ.Tests
             var attribute = new RabbitMQAttribute
             {
                 HostName = Constants.LocalHost,
-                QueueName = "queue",
+                RoutingKey = "route",
             };
 
             var context = new RabbitMQContext

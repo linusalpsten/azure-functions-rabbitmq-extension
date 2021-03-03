@@ -29,10 +29,10 @@ namespace Microsoft.Azure.WebJobs
         public string ExchangeName { get; set; }
 
         /// <summary>
-        /// Gets or sets the QueueName to send messages to.
+        /// Gets or sets the RoutingKey to send messages to.
         /// </summary>
         [AutoResolve]
-        public string QueueName { get; set; }
+        public string RoutingKey { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the app setting containing the username to authenticate with RabbitMQ. Eg: { UserName: "UserNameFromSettings" }

@@ -30,7 +30,7 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
 
         public Task AddAsync(byte[] message, CancellationToken cancellationToken = default)
         {
-            _batch.Add(exchange: _context.ResolvedAttribute.ExchangeName, routingKey: _context.ResolvedAttribute.QueueName, mandatory: false, properties: null, body: message);
+            _batch.Add(exchange: _context.ResolvedAttribute.ExchangeName, routingKey: _context.ResolvedAttribute.RoutingKey, mandatory: false, properties: null, body: message);
             _logger.LogDebug($"Adding message to batch for publishing...");
 
             return Task.CompletedTask;
