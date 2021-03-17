@@ -130,11 +130,9 @@ namespace Microsoft.Azure.WebJobs.Extensions.RabbitMQ
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            ThrowIfDisposed();
-
             if (!_started)
             {
-                throw new InvalidOperationException("The listener has not yet been started or has already been stopped");
+                return Task.CompletedTask;
             }
 
             _rabbitMQModel.BasicCancel(_consumerTag);
